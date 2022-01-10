@@ -1,0 +1,24 @@
+﻿@model ML.Usuario
+@{
+    ViewBag.Title = "CargaMasiva";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>CargaMasiva</h2>
+
+
+<div class="container">
+    <div class="row">
+
+    </div>
+
+</div>
+@using (Html.BeginForm("CargaMasiva", "UsuarioCargaMasiva", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="col-md-3">
+        <input type="file" id="fuUsuarios" name="ExcelUsuarios" />
+    </div>
+    <div class="col-md-1">
+        <input type="submit" value="Procesar" class="btn btn-info" />
+    </div>
+} 

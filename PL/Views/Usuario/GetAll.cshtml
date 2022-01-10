@@ -1,0 +1,66 @@
+﻿@model ML.Usuario
+@{
+    ViewBag.Title = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Usuarios</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <h5>Selecione + para registrar un usuario.... o eliminar para b </h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <p class="text-right">@Html.ActionLink("+", "Form", "Usuario", htmlAttributes: new { @class = "btn btn-success" })</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-bordered table-responsive">
+                <thead>
+                    <tr class="text-center">
+                        <td>Editar</td>
+                        <td class="hidden">IdUsuario</td>
+
+                        <td>Nombre</td>
+                        <td>Direccion</td>
+                        <td>Imagen</td>
+
+                        <td>Eliminar</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (ML.Usuario usuario in Model.Usuarios)
+                    {
+                    <tr class="text-center">
+                        <td><a class="btn btn-warning glyphicon glyphicon-edit" href="@Url.Action("Form", "Usuario", new { IdUsuario = usuario.IdUsuario })"></a></td>
+                        <td class="hidden">@usuario.IdUsuario</td>
+                        <td>@usuario.Nombre @usuario.ApellidoPaterno @usuario.ApellidoMaterno</td>
+                        <td class="hidden">@usuario.Direccion.IdDireccion</td>
+                        <td>@usuario.Direccion.Calle, @usuario.Direccion.NumExterior,@usuario.Direccion.NumInterior,@usuario.Direccion.Colonia.Nombre,@usuario.Direccion.Colonia.CodigoPostal, @usuario.Direccion.Colonia.Municipio.Nombre, @usuario.Direccion.Colonia.Municipio.Estado.Nombre, @usuario.Direccion.Colonia.Municipio.Estado.Pais.Nombre</td>
+
+                        @if (usuario.Imagen != null)
+                        {
+                            <td><img src="data:image/jpeg;base64,@Convert.ToBase64String(usuario.Imagen)" style=" height:150px; width: 150px;" /></td>
+                        }
+                        else
+                        {
+                            <td><img src="~/Content/sinproducto.jpg" style=" height:150px; width:150px;" /></td>
+                        }
+
+                        <td><a class="btn btn-danger glyphicon glyphicon-trash" href="@Url.Action("Delete", "Usuario", new { IdUsuario = usuario.IdUsuario})" onclick="return confirm('Estas seguro que deseas eliminar este registro?');"></a></td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
