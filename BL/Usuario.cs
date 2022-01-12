@@ -200,7 +200,7 @@ namespace BL
             {
 
                 oledbConn.Open();
-                using (OleDbCommand cmd = new OleDbCommand("SELECT * FROM [Sheet1$]", oledbConn))
+                using (OleDbCommand cmd = new OleDbCommand("SELECT * FROM [Hoja1$]", oledbConn))
                 {
                     OleDbDataAdapter da = new OleDbDataAdapter();
                     da.SelectCommand = cmd;

@@ -35,26 +35,29 @@
                 </div>
 
                 <div class="form-group">
-                    <div class="col-md-3">
+                    <div class="col-md-12">
                         @Html.LabelFor(model => model.Nombre)
-                        @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control", @id = "txtNombre" })
+                        @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control", @id = "txtNombre", @onkeypress = "return SoloLetras(event, 'lblErrorNombre')", @autocomplete = "off" })
                         @Html.ValidationMessageFor(model => model.Nombre)
+                        <label id="lblErrorNombre"></label>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <div class="col-md-3">
+                    <div class="col-md-12">
                         @Html.LabelFor(model => model.ApellidoPaterno)
-                        @Html.TextBoxFor(model => model.ApellidoPaterno, new { @class = "form-control" })
+                        @Html.TextBoxFor(model => model.ApellidoPaterno, new { @class = "form-control", @id = "txtApellidoPaterno", @onkeypress = "return SoloLetras(event, 'lblErrorApellidoPaterno')", @autocomplete = "off" })
                         @Html.ValidationMessageFor(model => model.ApellidoPaterno)
+                        <label id="lblErrorApellidoPaterno"></label>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <div class="col-md-3">
+                    <div class="col-md-12">
                         @Html.LabelFor(model => model.ApellidoMaterno)
-                        @Html.TextBoxFor(model => model.ApellidoMaterno, new { @class = "form-control" })
+                        @Html.TextBoxFor(model => model.ApellidoMaterno, new { @class = "form-control", @id = "txtApellidoMaterno", @onkeypress = "return SoloLetras(event, 'lblErrorApellidoMaterno')", @autocomplete = "off" })
                         @Html.ValidationMessageFor(model => model.ApellidoMaterno)
+                        <label id="lblErrorApellidoMaterno"></label>
                     </div>
                 </div>
 
@@ -101,3 +104,24 @@
         </div>
     </div>
 </div>
+
+<script>
+
+    function SoloLetras(e, controlId) {
+
+        var caracter = e.key;
+
+        if (!/^[a-zA-Z]*$/g.test(caracter)) {
+
+            $('#' + controlId).text("Solo se aceptan letras");
+            $('#' + controlId).css({ "color": "red" });
+
+            return false;
+        }
+        else {
+            $('#' + controlId).text("");
+            return true;
+        }
+    }//termina validacion de letras
+    </script>
+    
