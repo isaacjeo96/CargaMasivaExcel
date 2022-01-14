@@ -14,7 +14,7 @@ namespace BL
     public class Usuario
     {
         //ENTITY FRAMEWORK
-        public static Result GetAllEF()
+        public static Result GetAllEF(ML.Usuario usuario)
         {
             Result result = new Result();
 
@@ -23,7 +23,7 @@ namespace BL
                 using (DL.PruebaDDLEntities context = new DL.PruebaDDLEntities())
                 {
 
-                    var usuarios = context.UsuarioGetAll().ToList();
+                    var usuarios = context.UsuarioGetAll(usuario.Nombre, usuario.ApellidoPaterno, usuario.ApellidoMaterno).ToList(); 
 
                     result.Objects = new List<object>();
 
@@ -31,7 +31,7 @@ namespace BL
                     {
                         foreach (var obj in usuarios)
                         {
-                            ML.Usuario usuario = new ML.Usuario();
+                            usuario = new ML.Usuario();
 
                             usuario.IdUsuario = obj.IdUsuario;
                             usuario.Nombre = obj.Nombre;

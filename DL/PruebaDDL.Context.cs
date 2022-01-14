@@ -77,11 +77,6 @@ namespace DL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UsuarioDelete", idUsuarioParameter);
         }
     
-        public virtual ObjectResult<UsuarioGetAll_Result> UsuarioGetAll()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UsuarioGetAll_Result>("UsuarioGetAll");
-        }
-    
         public virtual ObjectResult<UsuarioGetById_Result> UsuarioGetById(Nullable<int> idUsuario)
         {
             var idUsuarioParameter = idUsuario.HasValue ?
@@ -123,6 +118,23 @@ namespace DL
         public virtual ObjectResult<DireccionGetAll_Result> DireccionGetAll()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<DireccionGetAll_Result>("DireccionGetAll");
+        }
+    
+        public virtual ObjectResult<UsuarioGetAll_Result> UsuarioGetAll(string nombre, string apellidoPaterno, string apellidoMaterno)
+        {
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("Nombre", nombre) :
+                new ObjectParameter("Nombre", typeof(string));
+    
+            var apellidoPaternoParameter = apellidoPaterno != null ?
+                new ObjectParameter("ApellidoPaterno", apellidoPaterno) :
+                new ObjectParameter("ApellidoPaterno", typeof(string));
+    
+            var apellidoMaternoParameter = apellidoMaterno != null ?
+                new ObjectParameter("ApellidoMaterno", apellidoMaterno) :
+                new ObjectParameter("ApellidoMaterno", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UsuarioGetAll_Result>("UsuarioGetAll", nombreParameter, apellidoPaternoParameter, apellidoMaternoParameter);
         }
     }
 }

@@ -14,7 +14,11 @@ namespace PL.Controllers
         {
             ML.Usuario usuario = new ML.Usuario();
 
-            ML.Result result = BL.Usuario.GetAllEF();
+            usuario.Nombre = (usuario.Nombre == null) ? "" : usuario.Nombre;
+            usuario.ApellidoPaterno = (usuario.ApellidoPaterno == null) ? "" : usuario.ApellidoPaterno;
+            usuario.ApellidoMaterno = (usuario.ApellidoMaterno == null) ? "" : usuario.ApellidoMaterno;
+
+            ML.Result result = BL.Usuario.GetAllEF(usuario);
 
             if (result.Correct)
             {
@@ -26,7 +30,33 @@ namespace PL.Controllers
                 ViewBag.Message = "Ocurrió un error al obtener la información" + result.ErrorMessage;
                 return PartialView("ValidationModal");
             }
-        }
+
+        }// termina getall
+
+        [HttpPost]
+        public ActionResult GetAll(ML.Usuario usuario)
+        {
+            //ML.Usuario usuario = new ML.Usuario();
+
+            usuario.Nombre = (usuario.Nombre == null) ? "" : usuario.Nombre;
+            usuario.ApellidoPaterno = (usuario.ApellidoPaterno == null) ? "" : usuario.ApellidoPaterno;
+            usuario.ApellidoMaterno = (usuario.ApellidoMaterno == null) ? "" : usuario.ApellidoMaterno;
+
+            ML.Result result = BL.Usuario.GetAllEF(usuario);
+
+            if (result.Correct)
+            {
+                usuario.Usuarios = result.Objects;
+
+                return View(usuario);
+            }
+            else
+            {
+                ViewBag.Message = "Ocurrió un error al obtener la información" + result.ErrorMessage;
+                return PartialView("ValidationModal");
+            }
+
+        }// termina getall
 
         [HttpGet]
         public ActionResult Form(int? IdUsuario) //Add { Id null } //Update {Id > 0 }
