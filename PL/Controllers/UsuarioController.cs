@@ -14,9 +14,9 @@ namespace PL.Controllers
         {
             ML.Usuario usuario = new ML.Usuario();
 
-            usuario.Nombre = (usuario.Nombre == null) ? "" : usuario.Nombre;
-            usuario.ApellidoPaterno = (usuario.ApellidoPaterno == null) ? "" : usuario.ApellidoPaterno;
-            usuario.ApellidoMaterno = (usuario.ApellidoMaterno == null) ? "" : usuario.ApellidoMaterno;
+            usuario.Nombre = (usuario.Nombre == null) ? "" : usuario.Nombre; //operador ternario
+            usuario.ApellidoPaterno = (usuario.ApellidoPaterno == null) ? "" : usuario.ApellidoPaterno; //operador ternario
+            usuario.ApellidoMaterno = (usuario.ApellidoMaterno == null) ? "" : usuario.ApellidoMaterno; //operador ternario 
 
             ML.Result result = BL.Usuario.GetAllEF(usuario);
 
